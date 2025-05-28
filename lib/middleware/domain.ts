@@ -25,10 +25,8 @@ export default async function DomainMiddleware(req: NextRequest) {
         new URL("https://www.pashupaticapital.com/", req.url),
       );
     }
-
-    return NextResponse.redirect(
-      new URL("https://www.papermark.com/home", req.url),
-    );
+    // The generic redirect to papermark.com/home for path === "/" on other custom domains is removed.
+    // Requests for path === "/" will now fall through to the rewrite logic below.
   }
 
   const url = req.nextUrl.clone();
